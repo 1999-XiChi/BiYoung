@@ -1,29 +1,20 @@
 # biyoung
 
-## Project setup
-```
-yarn install
-```
+BiYoung微信小程序
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+## 技术栈：uni-app
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+## How to start?
++ `npm install`
++ `npm run dev:%PLATFORM%`
++ `npm run build:%PLATFORM%`
 
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+`%PLATFORM%` 可取值如下：
+|值	|平台|
+|:----|:----:|
+|h5|	H5|
+|mp-alipay|	支付宝小程序|
+|mp-baidu|	百度小程序|
+|mp-weixin	|微信小程序|
+|mp-toutiao|	字节跳动小程序|
+|mp-qq | qq小程序|

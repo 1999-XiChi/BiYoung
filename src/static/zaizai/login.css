@@ -1,0 +1,131 @@
+.zaiui-login-content {
+  position: relative;
+  color: #2B2C2D;
+}
+.zaiui-login-content .text-center {
+  text-align: center;
+}
+.zaiui-login-content .logo-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.zaiui-login-content .logo-view .logo {
+  width: 109.09rpx;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 145.45rpx;
+  margin-bottom: 145.45rpx;
+}
+.zaiui-login-content .content {
+  position: relative;
+  padding: 0 36.36rpx;
+}
+.zaiui-login-content .content .title-h {
+  font-size: 45.45rpx;
+}
+.zaiui-login-content .content .introduce {
+  color: #909192;
+  font-size: 25.45rpx;
+  margin: 9.09rpx 0 36.36rpx;
+}
+.zaiui-login-content .content .introduce .tap {
+  color: #75A9C2;
+}
+.zaiui-login-content .content .zaiui-flex-view {
+  display: flex;
+}
+.zaiui-login-content .content .zaiui-flex-view .flex-sub {
+  flex: 1;
+}
+.zaiui-login-content .content .zaiui-flex-view .flex-sub + .flex-sub {
+  margin-left: 20px;
+}
+.zaiui-login-content .content .phone-input {
+  color: #2B2C2D;
+  padding: 18.18rpx 0;
+  border-bottom: 1.81rpx solid #EBECED;
+}
+.zaiui-login-content .content .phone-input .input-placeholder {
+  color: #909192;
+  font-size: 29.09rpx;
+}
+.zaiui-login-content .content .phone-input + .phone-input {
+  margin-top: 36.36rpx;
+}
+.zaiui-login-content .content .checking-view .phone-input {
+  font-size: 32.72rpx;
+}
+.zaiui-login-content .content .right-tip-view {
+  color: #c1c1c1;
+  font-size: 25.45rpx;
+  text-align: right;
+  margin-top: 18.18rpx;
+}
+.zaiui-login-content .content .right-tip-view .tap {
+  color: #75A9C2;
+}
+.zaiui-login-content .zaiui-btn {
+  position: relative;
+  border: 0;
+  width: 100%;
+  color: #ffffff;
+  line-height: 1;
+  height: 81.81rpx;
+  padding: 0 29.09rpx;
+  font-size: 27.27rpx;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  text-decoration: none;
+  overflow: visible;
+  margin-left: initial;
+  transform: translate(0, 0);
+  margin-right: initial;
+  border-radius: 654.54rpx;
+  background-color: #FF776D;
+}
+.zaiui-login-content .zaiui-btn:after {
+  display: none;
+}
+.zaiui-login-content .zaiui-btn.button-hover {
+  transform: translate(1rpx, 1rpx);
+}
+.zaiui-login-content .foot-view {
+  width: 100%;
+  position: fixed;
+  bottom: 63.63rpx;
+}
+.zaiui-login-content .foot-view .zaiui-btn-view {
+  padding: 0 36.36rpx;
+}
+.zaiui-login-content .foot-view .font-tag-view {
+  position: relative;
+  text-align: center;
+  margin-top: 20px;
+  width: 100%;
+}
+.zaiui-login-content .foot-view .font-tag-view .font-tag {
+  position: relative;
+  color: #c1c1c1;
+  font-size: 25.45rpx;
+}
+.zaiui-login-content .foot-view .font-tag-view .font-tag + .font-tag {
+  margin-left: 63.63rpx;
+}
+.zaiui-login-content .foot-view .font-tag-view .font-tag + .font-tag:after {
+  content: " ";
+  display: block;
+  width: 2rpx;
+  height: 100%;
+  top: 0;
+  left: -31.81rpx;
+  position: absolute;
+  background: #c1c1c1;
+  transform: scale(0.5);
+  box-sizing: border-box;
+  pointer-events: none;
+}

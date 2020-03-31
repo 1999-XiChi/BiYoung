@@ -1,16 +1,85 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "uni-app"
-			}
-		}
-	],
-	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
-	}
+  "pages": [
+    //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "首页"
+      }
+    },
+    {
+      "path": "pages/index/info",
+      "style": {
+        "navigationBarTitleText": "消息"
+      }
+    },
+    {
+      "path": "pages/index/myClass",
+      "style": {
+        "navigationBarTitleText": "我的班级"
+      }
+    },
+    {
+      "path": "pages/index/message",
+      "style": {
+        "navigationBarTitleText": "消息"
+      }
+    },
+    {
+      "path": "pages/index/login",
+      "style": {
+        "navigationBarTitleText": "我的"
+      }
+    },
+    {
+      "path": "pages/login/login",
+      "style": {
+        "navigationBarTitleText": "登录"
+      }
+    },
+    {
+      "path": "pages/login/code",
+      "style": {
+        "navigationBarTitleText": "验证码"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#007AFF",
+    "borderStyle": "black",
+    "backgroundColor": "#F8F8F8",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/tabbar/tab_icon_2.png",
+        "selectedIconPath": "static/tabbar/tab_icon_1.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/index/info",
+        "iconPath": "static/tabbar/tab_icon_4.png",
+        "selectedIconPath": "static/tabbar/tab_icon_3.png",
+        "text": "资讯"
+      },
+      {
+        "pagePath": "pages/index/message",
+        "iconPath": "static/tabbar/tab_icon_7.png",
+        "selectedIconPath": "static/tabbar/tab_icon_6.png",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/index/login",
+        "iconPath": "static/tabbar/tab_icon_9.png",
+        "selectedIconPath": "static/tabbar/tab_icon_8.png",
+        "text": "我的"
+      }
+    ]
+  }
 }
