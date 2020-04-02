@@ -1,7 +1,7 @@
 <template>
-	<view class="my-class">
+	<view class="homework">
 		<view>
-			my-class
+			homework
 		</view>
 	</view>
 </template>

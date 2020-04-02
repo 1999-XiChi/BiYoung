@@ -8,21 +8,15 @@
       }
     },
     {
-      "path": "pages/index/info",
+      "path": "pages/index/course",
       "style": {
-        "navigationBarTitleText": "消息"
+        "navigationBarTitleText": "课程"
       }
     },
     {
-      "path": "pages/index/myClass",
+      "path": "pages/index/homework",
       "style": {
-        "navigationBarTitleText": "我的班级"
-      }
-    },
-    {
-      "path": "pages/index/message",
-      "style": {
-        "navigationBarTitleText": "消息"
+        "navigationBarTitleText": "作业"
       }
     },
     {
@@ -63,16 +57,16 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/index/info",
+        "pagePath": "pages/index/course",
         "iconPath": "static/tabbar/tab_icon_4.png",
         "selectedIconPath": "static/tabbar/tab_icon_3.png",
-        "text": "资讯"
+        "text": "课程"
       },
       {
-        "pagePath": "pages/index/message",
+        "pagePath": "pages/index/homework",
         "iconPath": "static/tabbar/tab_icon_7.png",
         "selectedIconPath": "static/tabbar/tab_icon_6.png",
-        "text": "消息"
+        "text": "作业"
       },
       {
         "pagePath": "pages/index/login",
