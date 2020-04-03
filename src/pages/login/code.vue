@@ -1,7 +1,7 @@
 <template>
   <view class="zaiui-login-content">
     <view class="logo-view">
-      <image class="logo" src="/static/logo.jpg" mode="widthFix"></image>
+      <image class="logo" src="/static/logo.png" mode="widthFix"></image>
     </view>
     <view class="content">
       <view class="title-h">验证</view>
