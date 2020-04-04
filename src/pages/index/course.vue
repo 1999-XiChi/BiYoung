@@ -16,7 +16,12 @@
         </li>
       </ul>
     </view>
-    <swiper class="swiper" :current="currentIndex" @change="swiperChangeIndex">
+    <swiper
+      :style="{ height: clientHeight ? clientHeight + 'px' : 'auto' }"
+      class="swiper"
+      :current="currentIndex"
+      @change="swiperChangeIndex"
+    >
       <swiper-item>
         <view class="swiper-item my-class">
           <view class="my-class-card">
@@ -25,59 +30,83 @@
         </view>
       </swiper-item>
       <swiper-item>
-        <view class="swiper-item hot-courses">
-          <swiper indicator-dots autoplay class="banner-wrap">
-            <swiper-item
-              v-for="(item, index) in hotCourses"
-              :key="index"
-              class="banner"
-            >
-              <view
-                class="banner-bg"
-                :style="{ backgroundImage: `url(${item})` }"
-              ></view>
-            </swiper-item>
-          </swiper>
-          <view>
-            <scroll-view class="scroll-view_H" scroll-x="true">
-              <ul class="scroll-view-item_H">
-                <li
-                  class="sortingCourse"
-                  v-for="(course, i) in sortingCourses1"
-                  :key="i"
-                >
-                  <view class="sortingCourse-icon-bg" :style="{ backgroundColor: course.color}">
-                    <img class="sortingCourse-icon" :src="course.icon" />
+        <scroll-view
+          scroll-y="true"
+          :style="{ height: clientHeight ? clientHeight + 'px' : 'auto' }"
+        >
+          <view class="swiper-item hot-courses">
+            <swiper indicator-dots autoplay class="banner-wrap">
+              <swiper-item
+                v-for="(item, index) in hotCourses"
+                :key="index"
+                class="banner"
+              >
+                <view
+                  class="banner-bg"
+                  :style="{ backgroundImage: `url(${item})` }"
+                ></view>
+              </swiper-item>
+            </swiper>
+            <view>
+              <scroll-view class="scroll-view_H" scroll-x="true">
+                <ul class="scroll-view-item_H">
+                  <li
+                    class="sortingCourse"
+                    v-for="(course, i) in sortingCourses"
+                    :key="i"
+                  >
+                    <view
+                      class="sortingCourse-icon-bg"
+                      :style="{ backgroundColor: course.color }"
+                    >
+                      <img class="sortingCourse-icon" :src="course.icon" />
+                    </view>
+                    <text class="sortingCourse-text">{{ course.text }}</text>
+                  </li>
+                </ul>
+              </scroll-view>
+            </view>
+            <view class="courses-wrap">
+              <view class="head">
+                <text class="title">在线微课</text>
+                <text class="subtitle">快来试听吧~</text>
+                <view class="subjects" @tap="changeSubject">
+                  <view
+                    :class="[
+                      'subject',
+                      currentSubjectIndex === i ? 'active' : ''
+                    ]"
+                    :data-index="i"
+                    v-for="(subject, i) in subjects"
+                    :key="i"
+                    >{{ subject }}</view
+                  >
+                </view>
+              </view>
+              <view class="contain">
+                <view v-for="(course, i) in courseCards" :key="i">
+                  <view class="head">
+                    <view class="title">
+                      <view class="subject">{{ course.subject }}</view>
+                      <view class="name">{{ course.name }}</view>
+                    </view>
+                    <view class="detail">
+                      <view class="time">{{ course.time }}</view>
+                      <view class="grade">{{ course.grade }}</view>
+                    </view>
                   </view>
-                  <text class="sortingCourse-text">{{ course.text }}</text>
-                </li>
-              </ul>
-              <ul class="scroll-view-item_H">
-                <li
-                  class="sortingCourse"
-                  v-for="(course, i) in sortingCourses2"
-                  :key="i"
-                >
-                  <view class="sortingCourse-icon-bg" :style="{ backgroundColor: course.color }">
-                    <img class="sortingCourse-icon" :src="course.icon" />
+                  <view class="footer">
+                    <view class="teacher">{{ course.teacher }}</view>
+                    <view class="right">
+                      <view class="cost">{{ course.cost }}</view>
+                      <view class="count">{{ course.count }}</view>
+                    </view>
                   </view>
-                  <text class="sortingCourse-text">{{ course.text }}</text>
-                </li>
-              </ul>
-            </scroll-view>
-          </view>
-          <view class="courses-wrap">
-            <view class="head">
-              <text>在线微课<span>快来试听吧</span></text>
-              <view class="subjects">
-                <view v-for="subject in subjects">{{subject}}</view>
+                </view>
               </view>
             </view>
-            <view class="contain">
-              <view v-for="courseCard in courseCards"></view>
-            </view>
           </view>
-        </view>
+        </scroll-view>
       </swiper-item>
       <swiper-item>
         <view class="swiper-item curse-selection-guide">
@@ -102,7 +131,7 @@ export default {
         "http://biyoung.xichi.xyz/courses/banner/92d8e63f6c5dadb3cf1885766d6e6b34.png",
         "http://biyoung.xichi.xyz/courses/banner/aeafb46398a160cac13f63440aa0bcf7.jpg"
       ],
-      sortingCourses1: [
+      sortingCourses: [
         {
           icon:
             "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B%E8%A1%A5%E6%97%B6.svg",
@@ -110,12 +139,20 @@ export default {
           color: "#eb4559"
         },
         {
-          icon: "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B%20%281%29.png",
+          icon:
+            "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B%20%281%29.png",
           text: "期末复习",
           color: "#084177"
         },
         {
-          icon: "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B%20%282%29.png",
+          icon:
+            "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B%E8%A1%A8.png",
+          text: "高分策略",
+          color: "#ffae8f"
+        },
+        {
+          icon:
+            "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B%20%282%29.png",
           text: "名师专栏",
           color: "#fddb3a"
         },
@@ -123,43 +160,63 @@ export default {
           icon: "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B.png",
           text: "兴趣开发",
           color: "#1eb2a6"
-        }
-      ],
-      sortingCourses2: [
+        },
         {
-          icon: "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B%E5%BD%A2%E5%BC%8F.png",
+          icon:
+            "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B%E5%BD%A2%E5%BC%8F.png",
           text: "演讲口才",
           color: "#b590ca"
         },
         {
-          icon: "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B%E6%9F%A5%E8%AF%A2.png",
+          icon:
+            "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B%E6%9F%A5%E8%AF%A2.png",
           text: "作文补习",
           color: "#f6d186"
         },
         {
-          icon: "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B%E7%94%BB%E5%83%8F.png",
+          icon:
+            "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B%E7%94%BB%E5%83%8F.png",
           text: "英语集训",
           color: "#00a8cc"
-        },
-        {
-          icon: "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B%E8%A1%A8.png",
-          text: "高分策略",
-          color: "#678a74"
         }
       ],
-      subjects: ["热门","语文","数学","英语","科学","其他"],
-      courseCards: [{
-        name: "编程思维训练班",
-        teacher: "王坤",
-        subject: "兴趣",
-        time: "4.23-9.19",
-        grade: "小学六年级",
-        cost: "199",
-        count: "66"
-      }]
+      subjects: ["热门", "语文", "数学", "英语", "科学", "其他"],
+      currentSubjectIndex: 0,
+      courseCards: [
+        {
+          name: "编程思维训练班",
+          teacher: "王坤",
+          subject: "兴趣",
+          time: "4.23-9.19",
+          grade: "小学六年级",
+          cost: "199",
+          count: "66"
+        },
+        {
+          name: "编程思维训练班",
+          teacher: "王坤",
+          subject: "兴趣",
+          time: "4.23-9.19",
+          grade: "小学六年级",
+          cost: "199",
+          count: "66"
+        },
+        {
+          name: "编程思维训练班",
+          teacher: "王坤",
+          subject: "兴趣",
+          time: "4.23-9.19",
+          grade: "小学六年级",
+          cost: "199",
+          count: "66"
+        }
+      ],
+      clientHeight: 0
     };
   },
-  onLoad() {},
+  onLoad() {
+    this.getClientHeight();
+  },
   methods: {
     tapChangeIndex(e) {
       this.currentIndex = e.target.dataset.index;
@@ -167,16 +224,25 @@ export default {
     swiperChangeIndex(e) {
       this.currentIndex = e.detail.current;
     },
-    scroll(e) {
-      console.log(e);
-      this.old.scrollTop = e.detail.scrollTop;
+    changeSubject(e) {
+      this.currentSubjectIndex = e.target.dataset.index;
+    },
+    getClientHeight() {
+      var that = this;
+      uni.getSystemInfo({
+        success: function(res) {
+          that.clientHeight = res.windowHeight;
+        }
+      });
     }
   }
 };
 </script>
 
 <style lang="stylus" scoped>
+redColor = #eb4559
 .course
+  background-color #FDFDFD
   .indicator-wrap
     padding 20px 20px
     .indicator
@@ -194,13 +260,12 @@ export default {
         transition .5s ease
         height 2px
         width 20px
-        background-color #eb4559
+        background-color redColor
       .active
-        color #eb4559
+        color redColor
       > li
         padding-right 15px
   .swiper
-    min-height calc(100vh - 56px)
     .my-class-card
       width 90vw
       height 150px
@@ -220,13 +285,15 @@ export default {
             background-size 150% 100%
       .scroll-view_H
         white-space nowrap
-        margin 30rpx 0
+        margin 0 0 10px 0
+        padding 10px 0
+        box-shadow 0 0 15px 0 #E5EAF0
         .scroll-view-item_H
           display inline-block
-          width 90%
+          width 93%
           .sortingCourse
             display inline-block
-            width 25%
+            width 20%
             .sortingCourse-icon-bg
               position relative
               width 60rpx
@@ -247,8 +314,34 @@ export default {
               line-height 40rpx
               color #666
       .courses-wrap
-        .subjects
-          display flex
+        margin-top 5px
+        box-shadow 0 0 5px 0 #E5EAF0
+        .head
+          padding 0 5vw
+          .title
+            font-size 14px
+            font-weight bold
+            letter-spacing .1em
+          .subtitle
+            font-size 12px
+            color #999
+            padding-left 5px
+          .subjects
+            display flex
+            margin-top 2px
+            .subject
+              margin 3px 5px
+              padding 3px 8px
+              font-size 10px
+              border 1px solid #666
+              border-radius 12px
+              color #666
+              &:first-child
+                margin-left -1px
+            .active
+              background-color redColor
+              color #ffffff
+              border none
     .curse-selection-guide
       height 1600px
 </style>
