@@ -84,22 +84,27 @@
                 </view>
               </view>
               <view class="contain">
-                <view v-for="(course, i) in courseCards" :key="i">
+                <view class="course-card" v-for="(course, i) in courseCards" :key="i">
                   <view class="head">
                     <view class="title">
                       <view class="subject">{{ course.subject }}</view>
                       <view class="name">{{ course.name }}</view>
                     </view>
                     <view class="detail">
-                      <view class="time">{{ course.time }}</view>
-                      <view class="grade">{{ course.grade }}</view>
+                      <view class="time">{{ course.time }} · </view>
+                      <view class="grade"> {{ course.grade }}</view>
                     </view>
                   </view>
                   <view class="footer">
-                    <view class="teacher">{{ course.teacher }}</view>
+                    <view class="teachers">
+                      <view v-for="(teacher, i) in course.teachers" :key="i" class="teacher">
+                        <img src="http://biyoung.xichi.xyz/icon/avatar_boy.png" class="avatar">
+                        <text>{{ teacher }}</text>
+                      </view>
+                    </view>
                     <view class="right">
-                      <view class="cost">{{ course.cost }}</view>
-                      <view class="count">{{ course.count }}</view>
+                      <view class="cost">￥ {{ course.cost }}</view>
+                      <view class="count">{{ course.count }}人已经报名</view>
                     </view>
                   </view>
                 </view>
@@ -180,12 +185,12 @@ export default {
           color: "#00a8cc"
         }
       ],
-      subjects: ["热门", "语文", "数学", "英语", "科学", "其他"],
+      subjects: ["热门", "语文", "数学", "英语", "科学", "兴趣"],
       currentSubjectIndex: 0,
       courseCards: [
         {
           name: "编程思维训练班",
-          teacher: "王坤",
+          teachers: ["王坤","胡里山"],
           subject: "兴趣",
           time: "4.23-9.19",
           grade: "小学六年级",
@@ -194,7 +199,7 @@ export default {
         },
         {
           name: "编程思维训练班",
-          teacher: "王坤",
+          teachers: ["王坤","胡里山"],
           subject: "兴趣",
           time: "4.23-9.19",
           grade: "小学六年级",
@@ -203,7 +208,7 @@ export default {
         },
         {
           name: "编程思维训练班",
-          teacher: "王坤",
+          teachers: ["王坤"],
           subject: "兴趣",
           time: "4.23-9.19",
           grade: "小学六年级",
@@ -315,9 +320,9 @@ redColor = #eb4559
               color #666
       .courses-wrap
         margin-top 5px
+        padding 0 5vw
         box-shadow 0 0 5px 0 #E5EAF0
         .head
-          padding 0 5vw
           .title
             font-size 14px
             font-weight bold
@@ -342,6 +347,63 @@ redColor = #eb4559
               background-color redColor
               color #ffffff
               border none
+        .contain
+          padding-bottom 20px
+          .course-card
+            width 100%
+            height 100px
+            margin 10px auto
+            padding 10px 5px
+            box-shadow 0 0 10px 0 #E5EAF0
+            border-radius 5px
+            display flex
+            flex-direction column
+            justify-content space-between
+            .title, .detail, .footer
+              display flex
+            .head
+              .title
+                display flex
+                align-items center
+                .subject
+                  background-color #f9a825
+                  font-weight 400
+                  font-size 12px
+                  line-height 15px
+                  height 15px
+                  padding 0 2px
+                  color #fff
+                .name
+                  margin-left 5px
+              .detail
+                font-size 13px
+                color #666
+            .footer
+              display flex
+              justify-content space-between
+              padding 0 5px
+              .teachers
+                display flex
+                .teacher
+                  display flex
+                  flex-direction column
+                  font-size 12px
+                  color #333
+                  margin-right 10px
+                  .avatar
+                    width 50rpx
+                    height 50rpx
+              .right
+                display flex
+                flex-direction column
+                justify-content space-around
+                .cost
+                  color #ff5252
+                  font-size 13px
+                  font-weight bold
+                .count
+                  color #666
+                  font-size 11px
     .curse-selection-guide
       height 1600px
 </style>
