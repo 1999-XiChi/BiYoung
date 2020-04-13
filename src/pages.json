@@ -10,7 +10,7 @@
     {
       "path": "pages/index/course",
       "style": {
-        "navigationBarTitleText": "课程"
+        "navigationBarTitleText": "我的课程"
       }
     },
     {
@@ -60,7 +60,7 @@
         "pagePath": "pages/index/course",
         "iconPath": "static/tabbar/tab_icon_4.png",
         "selectedIconPath": "static/tabbar/tab_icon_3.png",
-        "text": "课程"
+        "text": "我的课程"
       },
       {
         "pagePath": "pages/index/homework",

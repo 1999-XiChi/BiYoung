@@ -23,68 +23,40 @@
       @change="swiperChangeIndex"
     >
       <swiper-item>
-        <view class="swiper-item my-class">
-          <view class="my-class-card">
-            <text>我的课程</text>
-          </view>
-        </view>
-      </swiper-item>
-      <swiper-item>
         <scroll-view
           scroll-y="true"
           :style="{ height: clientHeight ? clientHeight + 'px' : 'auto' }"
         >
-          <view class="swiper-item hot-courses">
-            <swiper indicator-dots autoplay class="banner-wrap">
-              <swiper-item
-                v-for="(item, index) in hotCourses"
-                :key="index"
-                class="banner"
+          <view class="swiper-item my-class">
+            <view class="study-time-card">
+              <view class="study-time-wrap"></view>
+              <view class="study-time-main">
+                <cmd-circle
+                  cid="circle10"
+                  type="circle"
+                  :percent="studyTimeProgress"
+                  :showInfo="false"
+                  width="130"
+                ></cmd-circle>
+                <text class="info"
+                  >{{ studyTime }}分钟 / {{ planTime }}分钟</text
+                >
+              </view>
+              <view class="study-time-footer"
+                >今日已学习：{{ studyTime }}分钟</view
               >
-                <view
-                  class="banner-bg"
-                  :style="{ backgroundImage: `url(${item})` }"
-                ></view>
-              </swiper-item>
-            </swiper>
-            <view>
-              <scroll-view class="scroll-view_H" scroll-x="true">
-                <ul class="scroll-view-item_H">
-                  <li
-                    class="sortingCourse"
-                    v-for="(course, i) in sortingCourses"
-                    :key="i"
-                  >
-                    <view
-                      class="sortingCourse-icon-bg"
-                      :style="{ backgroundColor: course.color }"
-                    >
-                      <img class="sortingCourse-icon" :src="course.icon" />
-                    </view>
-                    <text class="sortingCourse-text">{{ course.text }}</text>
-                  </li>
-                </ul>
-              </scroll-view>
             </view>
-            <view class="courses-wrap">
+            <view class="my-courses">
               <view class="head">
-                <text class="title">在线微课</text>
-                <text class="subtitle">快来试听吧~</text>
-                <view class="subjects" @tap="changeSubject">
-                  <view
-                    :class="[
-                      'subject',
-                      currentSubjectIndex === i ? 'active' : ''
-                    ]"
-                    :data-index="i"
-                    v-for="(subject, i) in subjects"
-                    :key="i"
-                    >{{ subject }}</view
-                  >
-                </view>
+                <view>我的课程({{ myCourses.length }})</view>
+                <view>全部 ∨</view>
               </view>
               <view class="contain">
-                <view class="course-card" v-for="(course, i) in courseCards" :key="i">
+                <view
+                  class="course-card"
+                  v-for="(course, i) in myCourses"
+                  :key="i"
+                >
                   <view class="head">
                     <view class="title">
                       <view class="subject">{{ course.subject }}</view>
@@ -97,14 +69,30 @@
                   </view>
                   <view class="footer">
                     <view class="teachers">
-                      <view v-for="(teacher, i) in course.teachers" :key="i" class="teacher">
-                        <img src="http://biyoung.xichi.xyz/icon/avatar_boy.png" class="avatar">
+                      <view
+                        v-for="(teacher, i) in course.teachers"
+                        :key="i"
+                        class="teacher"
+                      >
+                        <img
+                          src="http://biyoung.xichi.xyz/icon/avatar_boy.png"
+                          class="avatar"
+                        />
                         <text>{{ teacher }}</text>
                       </view>
                     </view>
                     <view class="right">
-                      <view class="cost">￥ {{ course.cost }}</view>
-                      <view class="count">{{ course.count }}人已经报名</view>
+                      <view class="progress"
+                        >已学<span class="number">{{
+                          course.progress
+                        }}</span></view
+                      >
+                      <view class="count">
+                        <span style="font-weight:bold;padding-right: 3px;">{{
+                          course.count
+                        }}</span>
+                        成员</view
+                      >
                     </view>
                   </view>
                 </view>
@@ -114,110 +102,108 @@
         </scroll-view>
       </swiper-item>
       <swiper-item>
-        <view class="swiper-item curse-selection-guide">
-          <view class="swiper-item">
-            <text>选课指南</text>
+        <scroll-view
+          scroll-y="true"
+          :style="{ height: clientHeight ? clientHeight + 'px' : 'auto' }"
+        >
+          <view class="study-plan">
+            <imt-calendar :selected="calendarDate"></imt-calendar>
+            <view class="study-task-wrap">
+              <view class="title">课程</view>
+              <view
+                class="study-task"
+                v-for="(task, index) in studyTasks"
+                :key="index"
+              >
+                <text>{{ task.time }} {{ task.course }} {{ task.task }}</text>
+                <text
+                  class="status"
+                  :style="{ color: statusColor(task.status) }"
+                  >{{ task.status }}</text
+                >
+              </view>
+            </view>
           </view>
-        </view>
+        </scroll-view>
       </swiper-item>
     </swiper>
   </view>
 </template>
 
 <script>
+import cmdCircle from "@/components/cmd-circle/cmd-circle.vue";
+import imtCalendar from "components/imt-calendar/imt-calendar";
 export default {
+  components: { cmdCircle, imtCalendar },
   data() {
     return {
       currentIndex: 0,
-      tabs: ["我的课程", "热门课程", "选课指南"],
-      hotCourses: [
-        "http://biyoung.xichi.xyz/courses/banner/1a6eef83cc835d092fe97ac0cd727ed0.jpg",
-        "http://biyoung.xichi.xyz/courses/banner/0e436fc5cae53f0a0332458f91cd597c.png",
-        "http://biyoung.xichi.xyz/courses/banner/92d8e63f6c5dadb3cf1885766d6e6b34.png",
-        "http://biyoung.xichi.xyz/courses/banner/aeafb46398a160cac13f63440aa0bcf7.jpg"
-      ],
-      sortingCourses: [
+      tabs: ["我的课程", "学习计划"],
+      studyTime: 28,
+      planTime: 60,
+      clientHeight: 0,
+      myCourses: [
         {
-          icon:
-            "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B%E8%A1%A5%E6%97%B6.svg",
-          text: "限时免费",
-          color: "#eb4559"
+          name: "编程思维训练班",
+          teachers: ["王坤", "胡里山"],
+          subject: "兴趣",
+          time: "4.23-9.19",
+          grade: "小学六年级",
+          progress: "33%",
+          count: "66"
         },
         {
-          icon:
-            "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B%20%281%29.png",
-          text: "期末复习",
-          color: "#084177"
+          name: "名家写作班",
+          teachers: ["闻喜想"],
+          subject: "语文",
+          time: "4.23-5.19",
+          grade: "小学六年级",
+          progress: "1%",
+          count: "36"
         },
         {
-          icon:
-            "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B%E8%A1%A8.png",
-          text: "高分策略",
-          color: "#ffae8f"
-        },
-        {
-          icon:
-            "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B%20%282%29.png",
-          text: "名师专栏",
-          color: "#fddb3a"
-        },
-        {
-          icon: "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B.png",
-          text: "兴趣开发",
-          color: "#1eb2a6"
-        },
-        {
-          icon:
-            "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B%E5%BD%A2%E5%BC%8F.png",
-          text: "演讲口才",
-          color: "#b590ca"
-        },
-        {
-          icon:
-            "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B%E6%9F%A5%E8%AF%A2.png",
-          text: "作文补习",
-          color: "#f6d186"
-        },
-        {
-          icon:
-            "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B%E7%94%BB%E5%83%8F.png",
-          text: "英语集训",
-          color: "#00a8cc"
+          name: "英语演讲班",
+          teachers: ["徐旭才"],
+          subject: "英语",
+          time: "5.23-3.19",
+          grade: "小学六年级",
+          progress: "99%",
+          count: "35"
         }
       ],
-      subjects: ["热门", "语文", "数学", "英语", "科学", "兴趣"],
-      currentSubjectIndex: 0,
-      courseCards: [
+      calendarDate: ["2020-01-27", "2020-04-04", "2020-04-01", "2020-04-13"],
+      studyTasks: [
         {
-          name: "编程思维训练班",
-          teachers: ["王坤","胡里山"],
-          subject: "兴趣",
-          time: "4.23-9.19",
-          grade: "小学六年级",
-          cost: "199",
-          count: "66"
+          time: "9:00",
+          course: "编程思维训练班",
+          task: "第五次直播课",
+          status: "已结束"
         },
         {
-          name: "编程思维训练班",
-          teachers: ["王坤","胡里山"],
-          subject: "兴趣",
-          time: "4.23-9.19",
-          grade: "小学六年级",
-          cost: "199",
-          count: "66"
+          time: "14:00",
+          course: "名家写作班",
+          task: "风景描述",
+          status: "进行中"
         },
         {
-          name: "编程思维训练班",
-          teachers: ["王坤"],
-          subject: "兴趣",
-          time: "4.23-9.19",
-          grade: "小学六年级",
-          cost: "199",
-          count: "66"
+          time: "18:00",
+          course: "英语演讲班",
+          task: "外教Landy课",
+          status: "未开始"
+        },
+        {
+          time: "19:00",
+          course: "英语演讲班",
+          task: "小组讨论课",
+          status: "未开始"
         }
-      ],
-      clientHeight: 0
+      ]
     };
+  },
+  computed: {
+    studyTimeProgress: function() {
+      return (this.studyTime / this.planTime) * 100;
+    }
   },
   onLoad() {
     this.getClientHeight();
@@ -229,9 +215,6 @@ export default {
     swiperChangeIndex(e) {
       this.currentIndex = e.detail.current;
     },
-    changeSubject(e) {
-      this.currentSubjectIndex = e.target.dataset.index;
-    },
     getClientHeight() {
       var that = this;
       uni.getSystemInfo({
@@ -239,6 +222,22 @@ export default {
           that.clientHeight = res.windowHeight;
         }
       });
+    },
+    statusColor(status) {
+      let color = "";
+      switch (status) {
+        case "未开始":
+          break;
+        case "进行中":
+          color = "#4caf50";
+          break;
+        case "已结束":
+          color = "#eb4559";
+          break;
+        default:
+          break;
+      }
+      return color;
     }
   }
 };
@@ -271,82 +270,48 @@ redColor = #eb4559
       > li
         padding-right 15px
   .swiper
-    .my-class-card
-      width 90vw
-      height 150px
-      margin 0 auto
-      background-color #ffae8f
-    .hot-courses
-      .banner-wrap
-        width 100vw
-        height 150px
-        margin 0 auto
-        .banner
-          .banner-bg
-            margin 0 auto
-            width 90%
-            height 150px
-            background-position top
-            background-size 150% 100%
-      .scroll-view_H
-        white-space nowrap
-        margin 0 0 10px 0
-        padding 10px 0
-        box-shadow 0 0 15px 0 #E5EAF0
-        .scroll-view-item_H
-          display inline-block
-          width 93%
-          .sortingCourse
-            display inline-block
-            width 20%
-            .sortingCourse-icon-bg
-              position relative
-              width 60rpx
-              height 60rpx
-              border-radius 50%
-              margin 0 auto
-              .sortingCourse-icon
-                position absolute
-                width 40rpx
-                height 40rpx
-                top 50%
-                left 50%
-                transform translate(-50%, -50%)
-            .sortingCourse-text
-              display block
-              text-align center
-              font-size 12px
-              line-height 40rpx
-              color #666
-      .courses-wrap
-        margin-top 5px
-        padding 0 5vw
+    .swiper-item
+      padding 0 5vw
+    .my-class
+      .study-time-card
+        position relative
+        margin 5px auto
+        padding 5px 0
         box-shadow 0 0 5px 0 #E5EAF0
-        .head
-          .title
-            font-size 14px
-            font-weight bold
-            letter-spacing .1em
-          .subtitle
+        border-radius 10px
+        background-image url('http://photo-static-api.fotomore.com/creative/vcg/veer/612/veer-134067555.jpg')
+        background-size cover
+        .study-time-wrap
+          position absolute
+          top 50%
+          left 50%
+          transform translate(-50%, -50%)
+          z-index 1
+          width 80%
+          height 95%
+          border-radius 10px
+          background-color rgba(255,255,255,0.6)
+        .study-time-main
+          position relative
+          z-index 2
+          height 130px
+          display flex
+          justify-content center
+          .info
+            position absolute
+            top 50%
+            left 50%
+            transform translate(-50%, -50%)
             font-size 12px
-            color #999
-            padding-left 5px
-          .subjects
-            display flex
-            margin-top 2px
-            .subject
-              margin 3px 5px
-              padding 3px 8px
-              font-size 10px
-              border 1px solid #666
-              border-radius 12px
-              color #666
-              &:first-child
-                margin-left -1px
-            .active
-              background-color redColor
-              color #ffffff
-              border none
+        .study-time-footer
+          position relative
+          z-index 2
+          text-align center
+          line-height 30px
+      .my-courses
+        .head
+          display flex
+          justify-content space-between
         .contain
           padding-bottom 20px
           .course-card
@@ -384,6 +349,7 @@ redColor = #eb4559
               padding 0 5px
               .teachers
                 display flex
+                align-items flex-end
                 .teacher
                   display flex
                   flex-direction column
@@ -394,16 +360,25 @@ redColor = #eb4559
                     width 50rpx
                     height 50rpx
               .right
-                display flex
-                flex-direction column
-                justify-content space-around
-                .cost
-                  color #ff5252
-                  font-size 13px
-                  font-weight bold
+                .progress
+                  .number
+                    color redColor
+                    padding-left 5px
                 .count
                   color #666
-                  font-size 11px
-    .curse-selection-guide
-      height 1600px
+                  font-size 13px
+    .study-plan
+      .study-task-wrap
+        padding 0 5vw
+        margin 10px 0
+        .title
+          font-weight bold
+        .study-task
+          display flex
+          justify-content space-between
+          line-height 50px
+          border-bottom 1px dashed #e0e0e0
+          .status
+            color #999
+            font-size 15px
 </style>
