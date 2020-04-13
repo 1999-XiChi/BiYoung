@@ -123,7 +123,52 @@
           :style="{ height: clientHeight ? clientHeight + 'px' : 'auto' }"
         >
           <view class="growth-example index-item">
-            <text>成长榜样</text>
+            <view class="growth-example-wrap">
+              <view class="title">
+                <text>成长榜样</text>
+                <text class="more">更多>></text>
+              </view>
+              <view class="main">
+                <view class="item" v-for="(example, index) in growthExamples" :key="index">
+                  <view class="rank" :style="{color: rankColor[example.rank - 1]}">{{example.rank}}.</view>
+                  <img class="avatar" :src="example.avatar"></img>
+                  <view class="info">
+                    <view class="info-header">
+                      <text style="font-size:15px;font-weight:bold;">{{example.name}}</text>
+                      <view>
+                        <text style="color:#f44336;padding-left:20px;font-size:13px;">{{example.score}}</text>
+                        <text style="color:#666;padding-left:5px;font-size:12px;">榜样值</text>
+                      </view>
+                    </view>
+                    <view>{{example.comment}}</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="hot-dairy-wrap">
+              <view class="title">
+                <text>心情故事</text>
+                <text class="more">更多>></text>
+              </view>
+              <view class="main">
+                <view class="item" v-for="(dairy, index) in hotDairies" :key="index">
+                  <view class="rank" :style="{color: rankColor[dairy.rank - 1]}">{{dairy.rank}}.</view>
+                  <img class="dairy-img" :src="dairy.img">
+                  <view class="info">
+                    <view class="info-header">
+                      <view class="title">
+                        <text>{{dairy.title}}</text>
+                      </view>
+                      <view class="sub-info">
+                        <text>作者:{{dairy.author}}</text>
+                        <text style="padding-left:5px;">日期:{{dairy.date}}</text>
+                      </view>
+                    </view>
+                    <view class="text">{{dairy.text}}</view>
+                  </view>
+                </view>
+              </view>
+            </view>
           </view>
         </scroll-view>
       </swiper-item>
@@ -244,6 +289,48 @@ export default {
           count: "66"
         }
       ],
+      growthExamples: [{
+        name: "红领巾侠",
+        avatar: "http://biyoung.xichi.xyz/avatar/avatar1.jpg",
+        comment: "千万别迷恋网络游戏，要玩就玩好人生这场大游戏。",
+        score: 386,
+        rank: 1
+      },{
+        name: "何同学",
+        avatar: "http://biyoung.xichi.xyz/avatar/avatar2.jpg",
+        comment: "没有一种不通过蔑视、忍受和奋斗就可以征服的命运。",
+        score: 357,
+        rank: 2
+      },{
+        name: "死灵法师",
+        avatar: "http://biyoung.xichi.xyz/avatar/avatar3.jpg",
+        comment: "我要像一块石灰一样活着别人越泼我凉水我的人生越沸腾。",
+        score: 321,
+        rank: 3
+      }],
+      hotDairies: [{
+        title: "记海南之旅",
+        author: "西池",
+        img: "http://biyoung.xichi.xyz/dairy/dairy2.jpg",
+        text: "我是正文我是正文我是正文。我是正文我是正文我是正文。我是正文我是正文我是正文。",
+        date: "2020/04/12",
+        rank: 1
+      },{
+        title: "我谈《水浒传》",
+        author: "neko",
+        img: "http://biyoung.xichi.xyz/dairy/dairy3.jpg",
+        text: "我是正文我是正文我是正文。我是正文我是正文我是正文。我是正文我是正文我是正文。",
+        date: "2020/04/10",
+        rank: 2
+      },{
+        title: "寻找春天的踪迹",
+        author: "hlszd",
+        img: "http://biyoung.xichi.xyz/dairy/dairy1.jpg",
+        text: "我是正文我是正文我是正文。我是正文我是正文我是正文。我是正文我是正文我是正文。",
+        date: "2020/04/08",
+        rank: 3
+      }],
+      rankColor:["#f44336","#e91e63","#9c27b0","#f6d186"],
       clientHeight: 0
     };
   },
@@ -429,6 +516,55 @@ redColor = #eb4559
                 .count
                   color #666
                   font-size 11px
-    .curse-selection-guide
-      height 1600px
+    .growth-example
+      .title
+        font-weight bold
+        display flex
+        justify-content space-between
+        align-item center
+        .more
+          font-size 12px
+          color #666
+      .main
+        .item
+          display flex
+          height 80px
+          align-items center
+          .rank
+            width 15px
+            font-size 18px
+            font-weight bold
+          .avatar
+            width 60px
+            height 60px
+            border-radius 50%
+            box-shadow 0 0 5px 0 #aaa
+            margin 0 10px
+          .info
+            width calc(90vw - 75px)
+            .info-header
+              display flex
+              justify-content space-between
+      .growth-example-wrap
+        margin-bottom 50rpx
+      .hot-dairy-wrap
+        .item
+          height 120px
+          .dairy-img  
+            width 180px
+            height 100px
+            border-radius 10px
+            box-shadow 0 0 5px 0 #aaa
+            margin 0 10px
+          .info
+            .info-header
+              display inherit
+              .title
+                font-weight bold
+              .sub-info
+                color #333
+                font-size 12px
+            .text
+              font-size 12px
+              color #999
 </style>
