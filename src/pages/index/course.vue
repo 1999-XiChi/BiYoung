@@ -27,7 +27,7 @@
           scroll-y="true"
           :style="{ height: clientHeight ? clientHeight + 'px' : 'auto' }"
         >
-          <view class="swiper-item my-class">
+          <view class="swiper-item my-class course-item-0">
             <view class="study-time-card">
               <view class="study-time-wrap"></view>
               <view class="study-time-main">
@@ -106,7 +106,7 @@
           scroll-y="true"
           :style="{ height: clientHeight ? clientHeight + 'px' : 'auto' }"
         >
-          <view class="study-plan">
+          <view class="study-plan course-item-1">
             <imt-calendar :selected="calendarDate"></imt-calendar>
             <view class="study-task-wrap">
               <view class="title">课程</view>
@@ -205,23 +205,23 @@ export default {
       return (this.studyTime / this.planTime) * 100;
     }
   },
-  onLoad() {
-    this.getClientHeight();
+  onReady() {
+    this.getClientHeight(0);
   },
   methods: {
-    tapChangeIndex(e) {
+    async tapChangeIndex(e) {
       this.currentIndex = e.target.dataset.index;
     },
-    swiperChangeIndex(e) {
+    async swiperChangeIndex(e) {
       this.currentIndex = e.detail.current;
+      this.getClientHeight(this.currentIndex);
     },
-    getClientHeight() {
+    async getClientHeight(id) {
+      var query = uni.createSelectorQuery();
       var that = this;
-      uni.getSystemInfo({
-        success: function(res) {
-          that.clientHeight = res.windowHeight;
-        }
-      });
+      query.select(`.course-item-${id}`).boundingClientRect(function (rect) {
+        that.clientHeight = rect.height;
+      }).exec();
     },
     statusColor(status) {
       let color = "";

@@ -27,7 +27,7 @@
           scroll-y="true"
           :style="{ height: clientHeight ? clientHeight + 'px' : 'auto' }"
         >
-          <view class="swiper-item hot-courses">
+          <view class="swiper-item hot-courses index-item-0">
             <swiper indicator-dots autoplay class="banner-wrap">
               <swiper-item
                 v-for="(item, index) in hotCourses"
@@ -122,7 +122,7 @@
           scroll-y="true"
           :style="{ height: clientHeight ? clientHeight + 'px' : 'auto' }"
         >
-          <view class="growth-example index-item">
+          <view class="index-item growth-example index-item-1">
             <view class="growth-example-wrap">
               <view class="title">
                 <text>成长榜样</text>
@@ -177,7 +177,7 @@
           scroll-y="true"
           :style="{ height: clientHeight ? clientHeight + 'px' : 'auto' }"
         >
-          <view class="about-us index-item">
+          <view class="index-item about-us index-item-2">
             <text>关于BiYoung</text>
           </view>
         </scroll-view>
@@ -192,8 +192,6 @@ export default {
     return {
       currentIndex: 0,
       tabs: ["热门课程", "成长榜样", "关于我们"],
-      myCourses: [],
-      studyTime: "0分钟",
       hotCourses: [
         "http://biyoung.xichi.xyz/courses/banner/1a6eef83cc835d092fe97ac0cd727ed0.jpg",
         "http://biyoung.xichi.xyz/courses/banner/0e436fc5cae53f0a0332458f91cd597c.png",
@@ -334,26 +332,28 @@ export default {
       clientHeight: 0
     };
   },
-  onLoad() {
-    this.getClientHeight();
+  onReady() {
+    this.getClientHeight(0);
+    console.log(this);
   },
   methods: {
-    tapChangeIndex(e) {
+    async tapChangeIndex(e) {
       this.currentIndex = e.target.dataset.index;
     },
-    swiperChangeIndex(e) {
+    async swiperChangeIndex(e) {
       this.currentIndex = e.detail.current;
+      console.log(this);
+      this.getClientHeight(this.currentIndex);
     },
     changeSubject(e) {
       this.currentSubjectIndex = e.target.dataset.index;
     },
-    getClientHeight() {
+    async getClientHeight(id) {
+      var query = uni.createSelectorQuery();
       var that = this;
-      uni.getSystemInfo({
-        success: function(res) {
-          that.clientHeight = res.windowHeight;
-        }
-      });
+      query.select(`.index-item-${id}`).boundingClientRect(function (rect) {
+        that.clientHeight = rect.height;
+      }).exec();
     }
   }
 };
