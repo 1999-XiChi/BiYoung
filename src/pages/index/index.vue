@@ -177,8 +177,28 @@
           scroll-y="true"
           :style="{ height: clientHeight ? clientHeight + 'px' : 'auto' }"
         >
-          <view class="index-item about-us index-item-2">
-            <text>关于BiYoung</text>
+          <view class="about-us index-item-2">
+            <swiper indicator-dots autoplay class="banner-wrap">
+              <swiper-item
+                v-for="(item, index) in biyoungBanner"
+                :key="index"
+                class="banner"
+              >
+                <view
+                  class="banner-bg"
+                  :style="{ backgroundImage: `url(${item})` }"
+                ></view>
+              </swiper-item>
+            </swiper>
+              <view class="info-wrap">
+                <view class="bg"></view>
+                <view class="info">飞扬工作室（简称“BiYoung”）是一家专业以教育咨询为主的创新教育信息科技公司。飞扬工作室依托南京市社会培训行业协会栖霞分会提供栖霞区教育兼职信息。公司自2019年9月5日创办以来，一直致力于筛选、面试、培训有兼职需求的大学生，向教育机构高效输送中长期兼职教师。公司始终以“诚信、优质、高效”为宗旨，以“全心服务、高效沟通”为团队精神，并逐步形成一套较为完备的筛选、面试、培训、管理的一站式服务体系。
+托教项目是飞扬工作室2020年度启动的新一轮教育项目，本项目面向于小学一年级至六年级的学生，结合当前教育现状，我们致力于研发一套适合于小学生的晚托一体化服务体系，通过对不同年龄和性格等的学生的需求调查，适配出对应托教方案，从而引导学生在提高学习成绩的基础上，进一步实现多方面多层次的全面发展，响应素质教育的号召。</view>
+                <view class="contact">
+                  <view><text style="font-weight:bold;">联系电话：</text>19867205619 王女士</view>
+                  <view><text style="font-weight:bold;">地址：</text>江苏省南京市亚东新城区文苑路9号</view>
+                </view>
+              </view>
           </view>
         </scroll-view>
       </swiper-item>
@@ -202,25 +222,25 @@ export default {
         {
           icon:
             "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B%E8%A1%A5%E6%97%B6.svg",
-          text: "限时免费",
+          text: "一元体验课",
           color: "#eb4559"
         },
         {
           icon:
             "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B%20%281%29.png",
-          text: "期末复习",
+          text: "个性化师资匹配",
           color: "#084177"
         },
         {
           icon:
             "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B%E8%A1%A8.png",
-          text: "高分策略",
+          text: "沉浸式自习室",
           color: "#ffae8f"
         },
         {
           icon:
             "http://biyoung.xichi.xyz/course/icon/%E8%AF%BE%E7%A8%8B%20%282%29.png",
-          text: "名师专栏",
+          text: "live直播",
           color: "#fddb3a"
         },
         {
@@ -329,12 +349,17 @@ export default {
         rank: 3
       }],
       rankColor:["#f44336","#e91e63","#9c27b0","#f6d186"],
-      clientHeight: 0
+      clientHeight: 0,
+      biyoungBanner:[
+        "http://biyoung.xichi.xyz/banner/biyoung2.jpg",
+        "http://biyoung.xichi.xyz/banner/biyoung3.jpg",
+        "http://biyoung.xichi.xyz/banner/biyoung4.jpg",
+        "http://biyoung.xichi.xyz/banner/biyoung.jpg"
+      ]
     };
   },
   onReady() {
     this.getClientHeight(0);
-    console.log(this);
   },
   methods: {
     async tapChangeIndex(e) {
@@ -342,7 +367,6 @@ export default {
     },
     async swiperChangeIndex(e) {
       this.currentIndex = e.detail.current;
-      console.log(this);
       this.getClientHeight(this.currentIndex);
     },
     changeSubject(e) {
@@ -407,10 +431,10 @@ redColor = #eb4559
         box-shadow 0 0 15px 0 #E5EAF0
         .scroll-view-item_H
           display inline-block
-          width 93%
+          width 90%
           .sortingCourse
             display inline-block
-            width 20%
+            width 25%
             .sortingCourse-icon-bg
               position relative
               width 60rpx
@@ -457,8 +481,8 @@ redColor = #eb4559
                 margin-left -1px
             .active
               background-color redColor
+              border 1px solid redColor
               color #ffffff
-              border none
         .contain
           padding-bottom 20px
           .course-card
@@ -567,4 +591,34 @@ redColor = #eb4559
             .text
               font-size 12px
               color #999
+    .about-us
+      .banner-wrap
+        width 100vw
+        height 150px
+        margin 0 auto
+        .banner
+          .banner-bg
+            margin 0 auto
+            width 90%
+            height 150px
+            background-position top
+            background-size cover
+      .info-wrap
+        padding 0 5vw
+        margin-top 10px
+        position relative
+        .bg
+          position absolute
+          top 50%
+          left 50%
+          transform translate(-50%, -50%)
+          z-index -1
+          width 150px
+          height 255px
+          background-image url('http://biyoung.xichi.xyz/logo.png')
+          opacity 0.15
+        .info
+          text-indent 2em
+        .contact
+          margin-top 5px
 </style>
