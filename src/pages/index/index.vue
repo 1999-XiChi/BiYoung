@@ -1,5 +1,9 @@
 <template>
   <view class="index">
+	<view class="search-box">
+    <input class="search" type="text" placeholder="搜索你感兴趣的课程~" @tap="tapSearchBox">
+    <img class="icon" src="http://biyoung.xichi.xyz/icon/search.png">
+  </view>
     <view class="indicator-wrap">
       <ul
         class="indicator"
@@ -362,6 +366,11 @@ export default {
     this.getClientHeight(0);
   },
   methods: {
+    tapSearchBox(){
+      uni.navigateTo({
+        url: "/pages/search/search",
+      });
+    },
     async tapChangeIndex(e) {
       this.currentIndex = e.target.dataset.index;
     },
@@ -476,8 +485,25 @@ export default {
 redColor = #eb4559
 .index
   background-color #FDFDFD
+  .search-box
+    position relative
+    width 80%
+    height 30px
+    margin 5px auto
+    .search
+      background-color #F7F7F7
+      border-radius 20px
+      padding 2px 10px
+      font-size 12px
+    .icon
+      width 20px
+      height 20px
+      position absolute
+      top 50%
+      right 20px
+      transform translateY(-50%)
   .indicator-wrap
-    padding 20px 20px
+    padding 0 20px 20px 20px
     .indicator
       position relative
       display flex

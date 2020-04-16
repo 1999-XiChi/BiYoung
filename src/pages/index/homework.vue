@@ -267,45 +267,45 @@ export default {
       exerciseCards: [
         {
           img: "http://biyoung.xichi.xyz/homework/exerciseImg.jpg",
-          name: "第一章：数的运算",
+          name: "第一章：分数乘法",
           rate: "100%",
           progress: "78%",
           rank: "1"
         },
         {
           img: "http://biyoung.xichi.xyz/homework/exerciseImg.jpg",
-          name: "第二章：数的运算",
-          rate: "100%",
-          progress: "78%",
-          rank: "1"
+          name: "第二章：位置与方向（二）",
+          rate: "98%",
+          progress: "28%",
+          rank: "37"
         },
         {
           img: "http://biyoung.xichi.xyz/homework/exerciseImg.jpg",
-          name: "第三章：数的运算",
-          rate: "100%",
-          progress: "78%",
-          rank: "1"
+          name: "第三章：分数除法",
+          rate: "90%",
+          progress: "33%",
+          rank: "199"
         },
         {
           img: "http://biyoung.xichi.xyz/homework/exerciseImg.jpg",
-          name: "第四章：数的运算",
-          rate: "100%",
-          progress: "78%",
-          rank: "1"
+          name: "第四章：比",
+          rate: "89%",
+          progress: "100%",
+          rank: "183"
         },
         {
           img: "http://biyoung.xichi.xyz/homework/exerciseImg.jpg",
-          name: "第五章：数的运算",
-          rate: "100%",
-          progress: "78%",
-          rank: "1"
+          name: "第五章：圆",
+          rate: "87%",
+          progress: "99%",
+          rank: "205"
         },
         {
           img: "http://biyoung.xichi.xyz/homework/exerciseImg.jpg",
-          name: "第六章：数的运算",
-          rate: "100%",
-          progress: "78%",
-          rank: "1"
+          name: "第六章：百分数",
+          rate: "92%",
+          progress: "18%",
+          rank: "78"
         }
       ],
       booksRecommend: [

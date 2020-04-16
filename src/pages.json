@@ -2,6 +2,12 @@
   "pages": [
     //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
     {
+      "path": "pages/index/first",
+      "style": {
+        "navigationBarTitleText": "欢迎使用BiYOUNG"
+      }
+    },
+    {
       "path": "pages/index/index",
       "style": {
         "navigationBarTitleText": "首页"
@@ -36,11 +42,17 @@
       "style": {
         "navigationBarTitleText": "验证码"
       }
-    }
+    },
+	{
+	  "path": "pages/search/search",
+	  "style": {
+	    "navigationBarTitleText": "搜索"
+	  }
+	}
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "uni-app",
+    "navigationBarTitleText": "BiYoung",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"
   },
