@@ -136,7 +136,7 @@
                 }}</text></view
               >
               <view style="display:flex;">
-                <view v-for="i in book.rate" :key="i">★</view>
+                <view style="color:#ff5252;" v-for="i in book.rate" :key="i">★</view>
               </view>
               <view style="color:#C92B0C;font-size:14px;"
                 >“{{ book.comments }}”</view
@@ -146,7 +146,7 @@
         </view>
         <view class="reading-star-wrap">
           <view class="head"
-            >阅读之星<text style="font-weight:300;margin-left:10px;"
+            >阅读之星<text style="font-weight:300;margin-left:5px;"
               >（{{ readingStar.time }}）</text
             ></view
           >
@@ -380,7 +380,7 @@ export default {
     background-color #E9BF6C
     text-align center
     line-height 50px
-    font-size 60px
+    font-size 80rpx
     color #4e342e
     font-weight bold
     z-index 100
@@ -598,6 +598,7 @@ export default {
         padding 20px 10px
         .head
           font-weight bold
+          padding-left 20px
         .info
           width 80%
           margin 50rpx auto

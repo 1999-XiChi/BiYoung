@@ -153,9 +153,9 @@ export default {
           count: "66"
         },
         {
-          name: "名家写作班",
+          name: "托教“3+1”综合班",
           teachers: ["闻喜想"],
-          subject: "语文",
+          subject: "热门",
           time: "4.23-5.19",
           grade: "小学六年级",
           progress: "1%",

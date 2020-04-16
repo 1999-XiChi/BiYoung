@@ -267,38 +267,38 @@ export default {
           color: "#00a8cc"
         }
       ],
-      subjects: ["热门", "语文", "数学", "英语", "科学", "兴趣"],
+      subjects: ["热门","兴趣","微课","综合","语文", "数学", "英语"],
       currentSubjectIndex: 0,
       courseCards: [
         {
-          name: "编程思维训练班",
+          name: "托教“3+1”综合班",
           teachers: ["王坤", "胡里山"],
-          subject: "兴趣",
+          subject: "综合",
           time: "4.23-9.19",
           grade: "小学六年级",
           cost: "99",
           count: "66"
         },
         {
-          name: "名家写作班",
+          name: "珠心算进阶班",
           teachers: ["闻喜想"],
-          subject: "语文",
+          subject: "数学",
           time: "4.23-5.19",
           grade: "小学六年级",
           cost: "199",
           count: "36"
         },
         {
-          name: "英语演讲班",
+          name: "写作进阶班",
           teachers: ["徐旭才"],
-          subject: "英语",
+          subject: "语文",
           time: "5.23-3.19",
           grade: "小学六年级",
           cost: "599",
           count: "35"
         },
         {
-          name: "编程思维训练班",
+          name: "模拟联合国（体验课）",
           teachers: ["王坤", "胡里山"],
           subject: "兴趣",
           time: "4.23-9.19",
@@ -369,8 +369,97 @@ export default {
       this.currentIndex = e.detail.current;
       this.getClientHeight(this.currentIndex);
     },
-    changeSubject(e) {
+    async changeSubject(e) {
       this.currentSubjectIndex = e.target.dataset.index;
+      if(this.currentSubjectIndex == 1){
+        this.courseCards = [{
+          name: "智力开发课程",
+          teachers: ["王坤", "胡里山"],
+          subject: "兴趣",
+          time: "4.23-9.19",
+          grade: "小学六年级",
+          cost: "99",
+          count: "66"
+        },
+        {
+          name: "好习惯养成课",
+          teachers: ["闻喜想"],
+          subject: "兴趣",
+          time: "4.23-5.19",
+          grade: "小学六年级",
+          cost: "199",
+          count: "36"
+        }]
+      }else if(this.currentSubjectIndex == 2){
+        this.courseCards = [{
+          name: "鸡兔同笼问题",
+          teachers: ["王坤", "旬值"],
+          subject: "微课",
+          time: "4.23-9.19",
+          grade: "小学六年级",
+          cost: "99",
+          count: "66"
+        },
+        {
+          name: "路程问题（上）相遇问题",
+          teachers: ["闻喜想"],
+          subject: "微课",
+          time: "4.23-5.19",
+          grade: "小学六年级",
+          cost: "199",
+          count: "36"
+        },{
+          name: "路程问题（下）追及问题",
+          teachers: ["陆旬值"],
+          subject: "微课",
+          time: "4.23-5.19",
+          grade: "小学六年级",
+          cost: "199",
+          count: "36"
+        }]
+      }else{
+        this.courseCards =  [
+          {
+            name: "托教“3+1”综合班",
+            teachers: ["王坤", "胡里山"],
+            subject: "综合",
+            time: "4.23-9.19",
+            grade: "小学六年级",
+            cost: "99",
+            count: "66"
+          },
+          {
+            name: "珠心算进阶班",
+            teachers: ["闻喜想"],
+            subject: "数学",
+            time: "4.23-5.19",
+            grade: "小学六年级",
+            cost: "199",
+            count: "36"
+          },
+          {
+            name: "写作进阶班",
+            teachers: ["徐旭才"],
+            subject: "语文",
+            time: "5.23-3.19",
+            grade: "小学六年级",
+            cost: "599",
+            count: "35"
+          },
+          {
+            name: "模拟联合国（体验课）",
+            teachers: ["王坤", "胡里山"],
+            subject: "兴趣",
+            time: "4.23-9.19",
+            grade: "小学六年级",
+            cost: "99",
+            count: "66"
+          }
+        ]
+        this.$nextTick(function(){
+          this.getClientHeight(0);
+        });
+      }
     },
     async getClientHeight(id) {
       var query = uni.createSelectorQuery();
@@ -471,8 +560,8 @@ redColor = #eb4559
             display flex
             margin-top 2px
             .subject
-              margin 3px 5px
-              padding 3px 8px
+              margin 6rpx 8rpx
+              padding 6rpx 12rpx
               font-size 10px
               border 1px solid #666
               border-radius 12px
